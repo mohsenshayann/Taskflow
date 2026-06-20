@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
   db:
-    image: postgres:18
+    image: postgres:16
     restart: unless-stopped
     environment:
       POSTGRES_DB: taskflow_db
