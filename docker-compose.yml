@@ -10,8 +10,9 @@ services:
       - redis
     env_file:
       - .env
+
   db:
-    image: postgres:16
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_DB: taskflow_db
@@ -37,6 +38,7 @@ services:
     depends_on:
      - redis
      - db
+     
   nginx:
    image: nginx:latest
    restart: unless-stopped

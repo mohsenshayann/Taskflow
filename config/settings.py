@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,10 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "back.valinorfa.ir"
+    "www.back.valinorfa.ir"
+]
 
 
 # Application definition
@@ -159,4 +163,63 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
 
+#SECURITY HEADERS#
+SECURE_SSL_REDIRECT = True
 
+SESSION_COOKIE_SCEURE = True
+
+CSRF_COOKIE_SECURE = True
+
+
+
+BASE_DIR_LOGS = os.path.join(BASE_DIR, "logs")
+os.makedirs(BASE_DIR_LOGS, exist_ok=True)
+
+LOGGING = {
+
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "verbose": {
+            "format": "{asctime} [{levelname}] {name}: {message}",
+            "style": "{",
+        },
+    },
+
+
+    "handlers": {
+        "file": {
+            "class":
+            "logging.FileHandler",
+
+            "filename": os.path.join(BASE_DIR_LOGS, "project.log"),
+            "formatter": "verbose",
+        },
+    
+
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose"
+        },
+    },
+
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+
+    },
+
+    "loggers": {
+        "tasks": {
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["console", "file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
