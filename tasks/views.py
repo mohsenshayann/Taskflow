@@ -11,7 +11,7 @@ from .serializers import TaskSerializer
 
 from .services import TaskService
 
-logger = logging.getlogger(__name__)
+logger = logging.getLogger(__name__)
 
 class TaskViewSet(viewsets.ModelViewSet):
     
@@ -42,6 +42,6 @@ class TaskViewSet(viewsets.ModelViewSet):
         TaskService.create_task(
             project=data["project"],
             title=data["title"],
-            description=data.get("description", "")
+            description=data.get("description", ""),
             status=data.get("status", "todo")
         )

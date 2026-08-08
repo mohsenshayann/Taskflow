@@ -1,7 +1,7 @@
 import logging
 from rest_framework.exceptions import APIException
 
-logger = logging.getlogger(__name__)
+logger = logging.getLogger(__name__)
 
 class TaskLimitReached(
     APIException

@@ -1,9 +1,9 @@
 from .models import Task
-from .exceptions import TaskLimitReached
+from core.exceptions import TaskLimitReached
 
 import logging
 
-logger = logging.getlogger(__name__)
+logger = logging.getLogger(__name__)
 
 class TaskService:
 
@@ -11,7 +11,7 @@ class TaskService:
     def create_task(
         project,
         title,
-        description=""
+        description="",
         status="todo"
     ):
 
