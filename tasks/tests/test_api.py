@@ -28,3 +28,14 @@ response = self.client.post(url, data)
 
 self.assertEqual(response.status_code, 201)
 self.assertEqual(response.data["title"], "API Task")
+
+
+#@pytest.mark.django_db
+#def test_create_task_api(client, user):
+ #   client.force_login(user)
+
+#    response = client.post("/api/tasks/", {
+ #       "title": "API pytest"
+  #  })
+
+   # assert response.status_code == 201
