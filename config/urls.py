@@ -21,6 +21,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +36,15 @@ urlpatterns = [
     path('api/projects/', include('projects.urls')),
     
     path('api/tasks/', include('tasks.urls')),
+
+    path("api/", include("notifications.urls")),
+
+    path("api/", include("attachments.urls")),
+
+    path("api/", include("dashboard.urls")),
 ]
+
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT,
+ )

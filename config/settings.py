@@ -15,7 +15,15 @@ from decouple import config
 import os 
 import sys
 import sentry_sdk
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+sentry_sdk.init(
+    dsn=os.getenv("SENTRY_DSN"),
+    traces_sample_rate=0.1,
+)
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = BASE_DIR / "staticfiles" # production added part
@@ -47,7 +55,10 @@ INSTALLED_APPS = [
     'users',
     'projects',
     'tasks',
-    'django_filters'
+    'django_filters',
+    'notifications',
+    "attachments",
+    "dashboard",
 ]
 
 MIDDLEWARE = [
@@ -131,6 +142,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.User'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
